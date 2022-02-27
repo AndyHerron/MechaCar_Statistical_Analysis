@@ -74,3 +74,31 @@ yvals <- model$coefficients['AWD']*MCmpg$AWD +
 plt <- ggplot(MCmpg,aes(x=AWD,y=mpg)) #import dataset into ggplot2
 plt + geom_point() + geom_line(aes(y=yvals), color = "red") #plot scatter and linear model
 
+# Start the Suspension Coil analysis
+
+# read in the CSV file as a table
+coils <- read.csv(file='Suspension_Coil.csv',check.names=F,stringsAsFactors = F)
+head(coils)
+
+# create a total summary dataframe that shows mean, median, variance and SD for the PSI column
+total_summary <- coils %>% summarise(Mean=mean(PSI), Median=median(PSI), Variance=var(PSI), SD=sd(PSI))
+
+# create a lot summary dataframe to group each lot, then show mean, median, variance and SD for each.
+lot_summary <- coils %>% group_by(Manufacturing_Lot) %>% summarise(Mean=mean(PSI), Median=median(PSI), Variance=var(PSI), SD=sd(PSI), .groups = 'keep')
+
+# Start the t-test analysis
+
+# perform a t-test for the entire dataframe on PSI
+t.test((coils$PSI),mu=1500) 
+
+# perform a t-test for Lot 1
+Lot1_table <- subset(coils, Manufacturing_Lot == 'Lot1')
+t.test((Lot1_table$PSI),mu=mean((coils$PSI)))
+
+# perform a t-test for Lot 2
+Lot2_table <- subset(coils, Manufacturing_Lot == 'Lot2')
+t.test((Lot2_table$PSI),mu=mean((coils$PSI)))
+
+# perform a t-test for Lot 3
+Lot3_table <- subset(coils, Manufacturing_Lot == 'Lot3')
+t.test((Lot3_table$PSI),mu=mean((coils$PSI)))

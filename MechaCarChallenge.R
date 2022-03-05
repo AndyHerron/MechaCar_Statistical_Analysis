@@ -93,12 +93,12 @@ t.test((coils$PSI),mu=1500)
 
 # perform a t-test for Lot 1
 Lot1_table <- subset(coils, Manufacturing_Lot == 'Lot1')
-t.test((Lot1_table$PSI),mu=mean((coils$PSI)))
+t.test((Lot1_table$PSI),mu=1500)
 
 # perform a t-test for Lot 2
 Lot2_table <- subset(coils, Manufacturing_Lot == 'Lot2')
-t.test((Lot2_table$PSI),mu=mean((coils$PSI)))
+t.test((Lot2_table$PSI),mu=1500)
 
 # perform a t-test for Lot 3
 Lot3_table <- subset(coils, Manufacturing_Lot == 'Lot3')
-t.test((Lot3_table$PSI),mu=mean((coils$PSI)))
+t.test((Lot3_table$PSI),mu=1500)
